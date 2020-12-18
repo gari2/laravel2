@@ -8,26 +8,37 @@ use Illuminate\Support\Facades\Storage;
 
 class HelloController extends Controller
 {
-
-    function __construct()
+    private $fname;
+    public function __construct()
     {
-        $this->fname = 'sample.txt';
+        $this->fname = 'hello.txt';
     }
     public function index()
     {
-        $sample_msg = $this->fname;
-        $sample_data = Storage::get($this->fname);
+        $url = Storage::disk('public')->url($this->fname);
+        $size = Storage::disk('public')->size($this->fname);
+        $modified = Storage::disk('public')
+        ->lastModified($this->fname);
+        $modified_time = date('y-m-d H:i:s', $modified);
+        $sample_keys = ['url', 'size', 'modified'];
+        $sample_meta = [$url, $size, $modified_time];
+        $result = '<table><tr><th>' . implode('</th><th>', $sample_keys) . '</th></tr>';
+        $result .= '<tr><td>' . implode('</td><td>', $sample_meta) . '</td></tr></table>';
+        $sample_data = Storage::disk('public')->get($this->fname);
         $data = [
-            'msg' => $sample_msg,
+            'msg' => $result,
             'data'=> explode(PHP_EOL, $sample_data)
         ];
         return view('hello.index', $data);
     }
 
-    public function other($msg)
+    public function other(Request $request)
     {
-        // $data = Storage::get($this->fname) . PHP_EOL . $msg;
-        Storage::append($this->fname, $msg);
+        $ext = '.' . $request->file('file')->extension();
+        Storage::disk('public')->
+        putFileAs('files', $request->file('file'), 'uploaded' .
+        $ext);
+
         return redirect()->route('hello');
     }
 }
