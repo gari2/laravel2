@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\MyClasses\MyService;
 use App\MyClasses\MyServiceInterface;
+use App\MyClasses\PowerMyService;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -26,9 +27,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // config([
-        //     'sample.data'=>['こんにちは','どうも', 'さようなら']
-        // ]);
-        app()->bind('App\MyClasses\MyServiceInterface', 'App\MyClasses\MyService');
+        app()->resolving(function ($obj, $app){
+            if(is_object($obj))
+            {
+                echo get_class($obj) . '<br>';
+            }
+            else
+            {
+                echo $obj . '<br>';
+            }
+        });
+        // app()->bind('App\MyClasses\MyServiceInterface', 'App\MyClasses\PowerMyService');
+        app()->resolving(PowerMyService::class, function ($obj, $app){
+            $newdata = ['ハンバーグ', 'カレーライス', '唐揚げ', '餃子'];
+            $obj->setData($newdata);
+            $obj->setId(rand(0, count($newdata)));
+        });
+
+        app()->singleton('App\MyClasses\MyServiceInterface', '\App\MyClasses\PowerMyService');
     }
 }
