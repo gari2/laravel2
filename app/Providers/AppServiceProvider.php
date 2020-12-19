@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\MyClasses\MyService;
+use App\MyClasses\MyServiceInterface;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,8 +29,6 @@ class AppServiceProvider extends ServiceProvider
         // config([
         //     'sample.data'=>['こんにちは','どうも', 'さようなら']
         // ]);
-        app()->when('App\MyClasses\MyService')
-        ->needs('$id')
-        ->give(1);
+        app()->bind('App\MyClasses\MyServiceInterface', 'App\MyClasses\MyService');
     }
 }

@@ -31,7 +31,7 @@ Route::get('/', function () {
 //     Route::get('/sample', [SampleController::class, 'index']);
 //     Route::get('/sample/other', [SampleController::class, 'other']);
 // });
-// Route::get('/hello', [HelloController::class, 'index'])->name('hello');
+Route::get('/hello', [HelloController::class, 'index']);
 Route::get('/hello/{id}', [HelloController::class, 'index']);
 // Route::get('/hello/{msg}', [HelloController::class, 'other']);
 Route::get('/sample', [SampleController::class, 'index'])
