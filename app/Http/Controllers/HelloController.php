@@ -5,30 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Person;
+use App\MyClasses\MyService;
 use Illuminate\Support\Facades\Storage;
 
 
 class HelloController extends Controller
 {
     private $fname;
-    public function __construct()
+    public function __construct(MyService $myService)
     {
-        $this->fname = 'hello.txt';
+        $myservice = app('App\MyClasses\MyService');
     }
-    public function index(Request $request, Response $response)
+
+    public function index(Myservice $myservice, int $id = -1)
     {
-        $name = $request->query('name');
-        $mail = $request->query('mail');
-        $tel = $request->query('tel');
-        $msg = $request->query('msg');
-        $keys = ['名前', 'メール', '電話'];
-        $values = [$name, $mail, $tel];
+        $myservice->setId($id);
         $data = [
-            'msg' => $msg,
-            'keys' => $keys,
-            'values' => $values,
+            'msg' => $myservice->say($id),
+            'data' => $myservice->alldata(),
         ];
-        $request->flash();
         return view('hello.index', $data);
     }
 
