@@ -8,7 +8,7 @@ use App\Models\Person;
 // use App\MyClasses\MyService;
 use App\MyClasses\MyServiceInterface;
 use Illuminate\Support\Facades\Storage;
-
+use App\Facades\MyService;
 
 class HelloController extends Controller
 {
@@ -16,12 +16,12 @@ class HelloController extends Controller
     {
     }
 
-    public function index(MyServiceInterface $myservice, int $id = -1)
+    public function index(int $id = -1)
     {
-        $myservice->setId($id);
+        MyService::setId($id);
         $data = [
-            'msg' => $myservice->say(),
-            'data' => $myservice->alldata(),
+            'msg' => MyService::say(),
+            'data' => MyService::alldata(),
         ];
         return view('hello.index', $data);
     }
