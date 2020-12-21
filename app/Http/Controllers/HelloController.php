@@ -9,6 +9,8 @@ use App\Models\Person;
 use App\MyClasses\MyServiceInterface;
 use Illuminate\Support\Facades\Storage;
 use App\Facades\MyService;
+use Illuminate\Support\Facades\DB;
+use App\Http\Pagination\MyPaginator;
 
 class HelloController extends Controller
 {
@@ -16,12 +18,16 @@ class HelloController extends Controller
     {
     }
 
-    public function index(int $id = -1)
+    public function index(Request $request)
     {
-        MyService::setId($id);
+        $id = $request->query('page');
+        $msg = 'show page: ' . $id;
+        $result = Person::paginate(3);
+        $paginator = new MyPaginator($result);
         $data = [
-            'msg' => MyService::say(),
-            'data' => MyService::alldata(),
+            'msg' => $msg,
+            'data' => $result,
+            'paginator'=> $paginator,
         ];
         return view('hello.index', $data);
     }

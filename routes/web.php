@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\Sample\SampleController;
 use App\Http\Middleware\HelloMiddleware;
+use App\Http\Middleware\MyMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,10 @@ Route::get('/', function () {
 //     Route::get('/sample', [SampleController::class, 'index']);
 //     Route::get('/sample/other', [SampleController::class, 'other']);
 // });
-Route::get('/hello', [HelloController::class, 'index']);
-Route::get('/hello/{id}', [HelloController::class, 'index']);
+Route::get('/hello', [HelloController::class, 'index'])
+->middleware('MYMW');
+Route::get('/hello/{id}', [HelloController::class, 'index'])
+->middleware('MYMW');
 // Route::get('/hello/{msg}', [HelloController::class, 'other']);
 Route::get('/sample', [SampleController::class, 'index'])
 ->name('sample');
