@@ -11,14 +11,16 @@
 <body>
     <h1>Hello/Index</h1>
     <p>{!!$msg!!}</p>
-    <ol>
-    @foreach ($data as $item)
-    <li>
-        {{$item->name}} [{{$item->mail}}, {{$item->age}}]
-    </li>
-    @endforeach
-    </ol>
-    <br>
-    {!! $paginator->link() !!}
+    <table border="1">
+        @foreach ($data as $item)
+            <tr>
+                <th>{{$item->id}}</th>
+                <td>{{$item->name}}</td>
+                <td>{{$item->mail}}</td>
+                <td>{{$item->age}}</td>
+            </tr>
+        @endforeach
+    </table>
+    <hr>
 </body>
 </html>

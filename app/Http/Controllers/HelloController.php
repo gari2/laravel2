@@ -20,14 +20,19 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
-        $id = $request->query('page');
-        $msg = 'show page: ' . $id;
-        $result = Person::paginate(3);
-        $paginator = new MyPaginator($result);
+        $msg = 'show people record.';
+        $result = Person::get()->filter(function ($person) {
+            return $person->age < 50;
+        });
+        $result2 = Person::get()->filter(function($person)
+        {
+            return $person->age < 20;
+        });
+        $result3 = $result->diff($result2);
+
         $data = [
             'msg' => $msg,
-            'data' => $result,
-            'paginator'=> $paginator,
+            'data' => $result2,
         ];
         return view('hello.index', $data);
     }
