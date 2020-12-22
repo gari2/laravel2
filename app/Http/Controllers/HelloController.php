@@ -21,18 +21,12 @@ class HelloController extends Controller
     public function index(Request $request)
     {
         $msg = 'show people record.';
-        $result = Person::get()->filter(function ($person) {
-            return $person->age < 50;
-        });
-        $result2 = Person::get()->filter(function($person)
-        {
-            return $person->age < 20;
-        });
-        $result3 = $result->diff($result2);
+        $re = Person::get();
+        $fields = Person::get()->fields();
 
         $data = [
-            'msg' => $msg,
-            'data' => $result2,
+            'msg' => implode(', ', $fields),
+            'data' => $re,
         ];
         return view('hello.index', $data);
     }
@@ -47,5 +41,13 @@ class HelloController extends Controller
         $query_str = http_build_query($data);
         $data['msg'] = $query_str;
         return redirect()->route('hello', $data);
+    }
+
+    public function save($id, $name)
+    {
+        $record = Person::find($id);
+        $record->name = $name;
+        $record->save();
+        return redirect()->route(('hello'));
     }
 }

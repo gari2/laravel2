@@ -33,14 +33,16 @@ Route::get('/', function () {
 //     Route::get('/sample/other', [SampleController::class, 'other']);
 // });
 Route::get('/hello', [HelloController::class, 'index'])
-->middleware('MYMW');
-Route::get('/hello/{id}', [HelloController::class, 'index'])
-->middleware('MYMW');
+->name('hello');
+//Route::get('/hello/{id}', [HelloController::class, 'index'])
+//->middleware('MYMW');
 // Route::get('/hello/{msg}', [HelloController::class, 'other']);
 Route::get('/sample', [SampleController::class, 'index'])
 ->name('sample');
 // Route::post('/hello/other', [HelloController::class, 'other']);
 Route::get('/hello/other', [HelloController::class, 'other']);
+Route::get('/hello/{id}/{name}', [HelloController::class, 'save']);
+
 
 
 // Route::get('/hello/{person}', [HelloController::class, 'index']);
