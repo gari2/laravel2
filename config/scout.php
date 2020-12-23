@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'algolia'),
+    'driver' => env('SCOUT_DRIVER', 'tntsearch'),
 
     /*
     |--------------------------------------------------------------------------
@@ -98,9 +98,12 @@ return [
     |
     */
 
-    'algolia' => [
-        'id' => env('ALGOLIA_APP_ID', 'HA58Z2EJ8O'),
-        'secret' => env('ALGOLIA_SECRET', '355279fd2c80d7bd3ba9b47d9b95e956'),
+    // 'algolia' => [
+    //     'id' => env('ALGOLIA_APP_ID', 'HA58Z2EJ8O'),
+    //     'secret' => env('ALGOLIA_SECRET', '355279fd2c80d7bd3ba9b47d9b95e956'),
+    // ],
+    'tntsearch' => [
+        'storage' => storage_path(),
     ],
 
 ];

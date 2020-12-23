@@ -20,7 +20,9 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
+
         $msg = 'show people record.';
+        Person::get(['*'])->searchable();
         $result = Person::get();
 
         $data = [
@@ -28,6 +30,7 @@ class HelloController extends Controller
             'msg' => $msg,
             'data' => $result,
         ];
+
         return view('hello.index', $data);
     }
 
@@ -35,6 +38,7 @@ class HelloController extends Controller
     {
         $input = $request->input('find');
         $msg = 'search: ' . $input;
+        Person::get(['*'])->searchable();
         $result = Person::search($input)->get();
 
         $data = [
