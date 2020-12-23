@@ -34,6 +34,7 @@ Route::get('/', function () {
 // });
 Route::get('/hello', [HelloController::class, 'index'])
 ->name('hello');
+Route::post('/hello', [HelloController::class, 'send']);
 //Route::get('/hello/{id}', [HelloController::class, 'index'])
 //->middleware('MYMW');
 // Route::get('/hello/{msg}', [HelloController::class, 'other']);
@@ -41,7 +42,10 @@ Route::get('/sample', [SampleController::class, 'index'])
 ->name('sample');
 // Route::post('/hello/other', [HelloController::class, 'other']);
 Route::get('/hello/other', [HelloController::class, 'other']);
-Route::get('/hello/{id}/{name}', [HelloController::class, 'save']);
+// Route::get('/hello/{id}/{name}', [HelloController::class, 'save']);
+Route::get('/hello/json', [HelloController::class, 'json']);
+Route::get('/hello/json/{id}', [HelloController::class, 'json']);
+
 
 
 

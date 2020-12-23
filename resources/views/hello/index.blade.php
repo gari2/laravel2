@@ -2,23 +2,30 @@
 <html lang="ja">
 <head>
     <title>Index</title>
-    <style>
-        th{background-color: red;padding: 10px;}
-        td{background-color:#eee;padding: 10px;}
-    </style>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {{-- <link href="/css/app.css"  rel="stylesheet"> --}}
+    ……必要に応じて記述……
+ 
 </head>
 <body>
     <h1>Hello/Index</h1>
-    <p>{!!$msg!!}</p>
-    <table border="1">
+    <div>
+        <form action="/hello" method="POST">
+            @csrf
+            <input type="text" id="find" name="find" value="{{$input}}">
+            <input type="submit">
+        </form>
+    </div>
+    <hr>
+    <table>
         @foreach ($data as $item)
             <tr>
-                <th>{{$item->id}}</th>
-                <td>{{$item->name_and_age}}</td>
+            <th>{{$item->id}}</th>
+            <td>{{$item->all_data}}</td>
             </tr>
         @endforeach
     </table>
     <hr>
 </body>
+
+
 </html>

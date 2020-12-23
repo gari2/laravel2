@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use PhpParser\Node\Expr\FuncCall;
+use Laravel\Scout\Searchable;
 
 class Person extends Model
 {
+    use Searchable;
     protected $guarded = ['id'];
 
     public static $rules = [
@@ -43,6 +45,13 @@ class Person extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = strtoupper($value);
+    }
+
+    public function setAllDataAttribute(Array $value)
+    {
+        $this->attributes['name'] = $value[0];
+        $this->attributes['mail'] = $value[1];
+        $this->attributes['age'] = $value[2];
     }
 }
 
