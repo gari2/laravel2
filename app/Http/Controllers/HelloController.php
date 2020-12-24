@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Facades\MyService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Pagination\MyPaginator;
+use App\Jobs\Myjob;
 
 class HelloController extends Controller
 {
@@ -20,7 +21,7 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
-
+        Myjob::dispatch();
         $msg = 'show people record.';
         Person::get(['*'])->searchable();
         $result = Person::get();
