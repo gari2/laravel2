@@ -23,7 +23,8 @@ class HelloController extends Controller
     {
         if($person != null)
         {
-            Myjob::dispatch($person);
+            $qname = $person->id % 2 == 0 ? 'even' : 'odd';
+            Myjob::dispatch($person)->onQueue($qname);
         }
         $msg = 'show people record.';
         $result = Person::get();

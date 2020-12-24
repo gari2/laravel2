@@ -32,7 +32,6 @@ class Myjob implements ShouldQueue
      */
     public function handle()
     {
-        echo '<p class="myjob"> THIS IS MYJOB!</p>';
         $sufix = ' [+MYJOB]';
         if (strpos($this->person->name, $sufix))
         {
