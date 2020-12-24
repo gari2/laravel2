@@ -19,11 +19,13 @@ class HelloController extends Controller
     {
     }
 
-    public function index(Request $request)
+    public function index(Person $person = null)
     {
-        Myjob::dispatch();
+        if($person != null)
+        {
+            Myjob::dispatch($person);
+        }
         $msg = 'show people record.';
-        Person::get(['*'])->searchable();
         $result = Person::get();
 
         $data = [
