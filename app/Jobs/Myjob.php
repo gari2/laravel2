@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Console\ScheduleObj;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -9,20 +10,36 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Person;
+use Illuminate\Support\Facades\Storage;
 
 class Myjob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $person;
 
+    public function getPersonId()
+    {
+        return $this->person->id;
+    }
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Person $person)
+    public function __construct($id)
     {
-        $this->person = $person;
+        $this->person = Person::find($id)->first();
+    }
+
+    public function __invoke()
+    {
+        $this->handle();
+    }
+
+    public function handle()
+    {
+        $this->doJob();
     }
 
     /**
@@ -30,7 +47,7 @@ class Myjob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function doJob()
     {
         $sufix = ' [+MYJOB]';
         if (strpos($this->person->name, $sufix))
@@ -41,5 +58,7 @@ class Myjob implements ShouldQueue
             $this->person->name .= $sufix;
         }
         $this->person->save();
+
+        Storage::append('person_access_log.txt', $this->person->all_data);
     }
 }

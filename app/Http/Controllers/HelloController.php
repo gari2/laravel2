@@ -15,6 +15,7 @@ use App\Jobs\Myjob;
 // use Illuminate\Foundation\Bus\Dispatchable;
 use Symfony\Component\ErrorHandler\Debug;
 use Throwable;
+use App\Event\PersonEvent;
 
 class HelloController extends Controller
 {
@@ -39,16 +40,14 @@ class HelloController extends Controller
     {
         $id = $request->input('id');
         $person = Person::find($id);
-        logger()->info("a");
-        logger()->info($person);
-        dispatch_now(function() use ($person)
-        {
-            Storage::append('person_access_log.txt',$person);
-        });
-        // Storage::append('person_access_log.txt',
-        // $person);
-        // return redirect()->route('hello');
-        var_dump(get_defined_vars());
+
+        event(new PersonEvent($person));
+        $data = [
+            'input' => '',
+            'msg' => 'id='. $id,
+            'data' => [$person],
+        ];
+        return view('hello.index', $data);
     }
     
 
