@@ -12,46 +12,45 @@ use App\Facades\MyService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Pagination\MyPaginator;
 use App\Jobs\Myjob;
+// use Illuminate\Foundation\Bus\Dispatchable;
+use Symfony\Component\ErrorHandler\Debug;
+use Throwable;
 
 class HelloController extends Controller
 {
+    // use Dispatchable;
     public function __construct()
     {
     }
 
-    public function index(Person $person = null)
+    public function index()
     {
-        if($person != null)
-        {
-            $qname = $person->id % 2 == 0 ? 'even' : 'odd';
-            Myjob::dispatch($person)->onQueue($qname);
-        }
         $msg = 'show people record.';
         $result = Person::get();
-
         $data = [
-            'input'=>'',
+            'input' => '',
             'msg' => $msg,
             'data' => $result,
         ];
-
         return view('hello.index', $data);
     }
-
+        
     public function send(Request $request)
     {
-        $input = $request->input('find');
-        $msg = 'search: ' . $input;
-        Person::get(['*'])->searchable();
-        $result = Person::search($input)->get();
-
-        $data = [
-            'input' => $input,
-            'msg' => $msg,
-            'data'=> $result,
-        ];
-        return view('hello.index', $data);
+        $id = $request->input('id');
+        $person = Person::find($id);
+        logger()->info("a");
+        logger()->info($person);
+        dispatch_now(function() use ($person)
+        {
+            Storage::append('person_access_log.txt',$person);
+        });
+        // Storage::append('person_access_log.txt',
+        // $person);
+        // return redirect()->route('hello');
+        var_dump(get_defined_vars());
     }
+    
 
     public function other(Request $request)
     {
