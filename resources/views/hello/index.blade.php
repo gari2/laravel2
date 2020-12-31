@@ -2,29 +2,20 @@
 <html lang="ja">
 <head>
     <title>Index</title>
-    {{-- <link href="/css/app.css"  rel="stylesheet"> --}}
-    ……必要に応じて記述……
- 
+    <link href="{{ mix('css/app.css') }}"  rel="stylesheet" type="text/css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <h1>Hello/Index</h1>
-    <div>
-        <form action="/hello" method="POST">
-            @csrf
-            ID : <input type="text" id = "id" name="id">
-            <input type="submit">
-        </form>
+    <p>{{$msg}}</p>
+
+    <div id="app">
+        <app></app>
     </div>
-    <hr>
-    <table>
-        @foreach ($data as $item)
-            <tr>
-            <th>{{$item->id}}</th>
-            <td>{{$item->all_data}}</td>
-            </tr>
-        @endforeach
-    </table>
-    <hr>
+    <div id="app2">
+        <app2></app2>
+    </div>
+    <script src="{{ mix('js/app.js')}}"></script>
 </body>
 
 
