@@ -1,6 +1,8 @@
 <template>
     <div class="container">
         <p>{{msg}}</p>
+        <a v-bind:href='url'>WINGSプロジェクト</a>
+        <p>{{ localEmail() }}</p>
         <hr>
         <ul>
             <!-- <li v-for="person in people" :key="person.id"> -->
@@ -26,12 +28,18 @@ export default {
         return {
             msg:'wait...',
             name:'',
+            url: 'https://wings.msn.to/',
+            email:'Y-Suzuki@ezample.com',
+            flag: true,
             people:[],
         };
     },
     methods:{
         doAction:function(){
             this.msg = 'Hello, ' + this.name + '!!';
+        },
+        localEmail: function () {
+            return this.email.split('@')[0].toLowerCase();
         }
     },
 }

@@ -10,8 +10,8 @@ const app = new Vue({
 });
 
 import App2 from './components/MyComponent.vue'
-
+// Vue.config.delimiters = ['(%', '%)'];
 const app2 = new Vue({
     el: '#app2',
-    components: { App2 }
+    components: { App2 },
 });

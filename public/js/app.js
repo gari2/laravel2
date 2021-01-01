@@ -1923,12 +1923,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log("Component mounted.");
   }
 });
 
@@ -1943,6 +1940,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -1972,12 +1971,18 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
     return {
       msg: 'wait...',
       name: '',
+      url: 'https://wings.msn.to/',
+      email: 'Y-Suzuki@ezample.com',
+      flag: true,
       people: []
     };
   },
   methods: {
     doAction: function doAction() {
       this.msg = 'Hello, ' + this.name + '!!';
+    },
+    localEmail: function localEmail() {
+      return this.email.split('@')[0].toLowerCase();
     }
   }
 });
@@ -19648,9 +19653,7 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
+              _vm._v("I'm an example component.")
             ])
           ])
         ])
@@ -19681,6 +19684,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("p", [_vm._v(_vm._s(_vm.msg))]),
+    _vm._v(" "),
+    _c("a", { attrs: { href: _vm.url } }, [_vm._v("WINGSプロジェクト")]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.localEmail()))]),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -31909,6 +31916,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     App: _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
+ // Vue.config.delimiters = ['(%', '%)'];
 
 var app2 = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app2',
