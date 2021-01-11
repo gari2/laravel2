@@ -35,6 +35,9 @@ Route::get('/', function () {
 Route::get('/hello', [HelloController::class, 'index'])
 ->name('hello');
 Route::post('/hello', [HelloController::class, 'send']);
+Route::post('/hello/fileupload', [HelloController::class, 'file']);
+Route::get('/hello/fileupload', [HelloController::class, 'file']);
+
 // Route::get('/hello/{person}', [HelloController::class, 'index']);
 //Route::get('/hello/{id}', [HelloController::class, 'index'])
 //->middleware('MYMW');

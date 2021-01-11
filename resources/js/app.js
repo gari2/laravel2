@@ -15,3 +15,13 @@ const app2 = new Vue({
     el: '#app2',
     components: { App2 },
 });
+// setTimeout(function(){
+//     app2.$destroy();
+//     }, 3000);
+import App3 from './components/MyComponent3.vue'
+const app3 = new Vue({
+    el: '#app3',
+    components: {
+         App3
+    },
+});
