@@ -3,9 +3,9 @@
     <div>
       <p>現在値：{{ current }}</p>
     </div>
-    <mycomponent4 step="1" v-on:plus="onplus"></mycomponent4>
-    <mycomponent4 step="2" v-on:plus="onplus"></mycomponent4>
-    <mycomponent4 step="-1" v-on:plus="onplus"></mycomponent4>
+    <mycomponent4 step="1" v-on:click.native="onclick"></mycomponent4>
+    <mycomponent4 step="2" v-on:click.native="onclick"></mycomponent4>
+    <mycomponent4 step="-1" v-on:click.native="onclick"></mycomponent4>
   </div>
 </template>
 
@@ -19,8 +19,11 @@ components: {mycomponent4},
     }
  },
   methods: {
-    onplus: function (e) {
-      this.current += e;
+    onclick: function (e) {
+      this.current += Number(e.target.childNodes[0].nodeValue);
+      console.log(e);
+       //console.log(a);
+      console.log(Number(e.target.childNodes[0].nodeValue));
     },
   },
 };

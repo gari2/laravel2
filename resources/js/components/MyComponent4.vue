@@ -1,7 +1,5 @@
 <template>
-<button type="button" v-on:click="onclick">
-  {{ step }}
-  </button>
+<button type="button" v-on:click="onclick">{{ step }}</button>
 </template>
 <script>
 export default {

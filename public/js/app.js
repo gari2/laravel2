@@ -2621,8 +2621,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    onplus: function onplus(e) {
-      this.current += e;
+    onclick: function onclick(e) {
+      this.current += Number(e.target.childNodes[0].nodeValue);
+      console.log(e); //console.log(a);
+
+      console.log(Number(e.target.childNodes[0].nodeValue));
     }
   }
 });
@@ -2638,8 +2641,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -21640,11 +21641,32 @@ var render = function() {
     [
       _c("div", [_c("p", [_vm._v("現在値：" + _vm._s(_vm.current))])]),
       _vm._v(" "),
-      _c("mycomponent4", { attrs: { step: "1" }, on: { plus: _vm.onplus } }),
+      _c("mycomponent4", {
+        attrs: { step: "1" },
+        nativeOn: {
+          click: function($event) {
+            return _vm.onclick($event)
+          }
+        }
+      }),
       _vm._v(" "),
-      _c("mycomponent4", { attrs: { step: "2" }, on: { plus: _vm.onplus } }),
+      _c("mycomponent4", {
+        attrs: { step: "2" },
+        nativeOn: {
+          click: function($event) {
+            return _vm.onclick($event)
+          }
+        }
+      }),
       _vm._v(" "),
-      _c("mycomponent4", { attrs: { step: "-1" }, on: { plus: _vm.onplus } })
+      _c("mycomponent4", {
+        attrs: { step: "-1" },
+        nativeOn: {
+          click: function($event) {
+            return _vm.onclick($event)
+          }
+        }
+      })
     ],
     1
   )
@@ -21674,7 +21696,7 @@ var render = function() {
   return _c(
     "button",
     { attrs: { type: "button" }, on: { click: _vm.onclick } },
-    [_vm._v("\n  " + _vm._s(_vm.step) + "\n  ")]
+    [_vm._v(_vm._s(_vm.step))]
   )
 }
 var staticRenderFns = []
@@ -34146,15 +34168,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/components/MyComponent4.vue ***!
   \**************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MyComponent4_vue_vue_type_template_id_0224300e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MyComponent4.vue?vue&type=template&id=0224300e& */ "./resources/js/components/MyComponent4.vue?vue&type=template&id=0224300e&");
 /* harmony import */ var _MyComponent4_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyComponent4.vue?vue&type=script&lang=js& */ "./resources/js/components/MyComponent4.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _MyComponent4_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _MyComponent4_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -34184,7 +34205,7 @@ component.options.__file = "resources/js/components/MyComponent4.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/MyComponent4.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
